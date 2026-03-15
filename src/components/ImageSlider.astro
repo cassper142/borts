@@ -1,0 +1,82 @@
+---
+const { images = [], title } = Astro.props;
+---
+
+<section class="space-y-3">
+  <h4 class="text-sm font-semibold uppercase tracking-wide text-slate-500">
+    {title}
+  </h4>
+  {images.length === 0 ? (
+    <div class="flex h-40 items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-white/70 text-xs text-slate-400">
+      Загрузите изображения в папку для этого блока.
+    </div>
+  ) : (
+    <div class="relative">
+      <div class="flex items-center justify-between pb-2 text-xs font-medium text-slate-500">
+        <span>Всего {images.length}</span>
+        <div class="space-x-2">
+          <button
+            type="button"
+            class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white shadow-sm ring-1 ring-slate-200 transition hover:bg-rose-50"
+            data-slider-prev
+            aria-label="Предыдущий слайд"
+          >
+            ‹
+          </button>
+          <button
+            type="button"
+            class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white shadow-sm ring-1 ring-slate-200 transition hover:bg-rose-50"
+            data-slider-next
+            aria-label="Следующий слайд"
+          >
+            ›
+          </button>
+        </div>
+      </div>
+      <div class="relative overflow-hidden rounded-2xl bg-white shadow-sm">
+        <div class="flex transition-transform duration-300 ease-out" data-slider-track>
+          {images.map((src: string, index: number) => (
+            <figure
+              class="aspect-[4/3] min-w-full shrink-0 bg-slate-100 object-cover"
+              data-slider-index={index}
+            >
+              <img src={src} alt="" loading="lazy" class="h-full w-full object-cover" />
+            </figure>
+          ))}
+        </div>
+      </div>
+    </div>
+  )}
+
+<script>
+  const setupSlider = (root) => {
+    const track = root.querySelector("[data-slider-track]");
+    if (!track) return;
+    const slides = track.querySelectorAll("[data-slider-index]");
+    if (!slides.length) return;
+
+    let current = 0;
+
+    const update = () => {
+      const offset = -current * 100;
+      track.style.transform = `translateX(${offset}%)`;
+    };
+
+    root.querySelector("[data-slider-prev]")?.addEventListener("click", () => {
+      current = (current - 1 + slides.length) % slides.length;
+      update();
+    });
+
+    root.querySelector("[data-slider-next]")?.addEventListener("click", () => {
+      current = (current + 1) % slides.length;
+      update();
+    });
+  };
+
+  globalThis.addEventListener("DOMContentLoaded", () => {
+    document
+      .querySelectorAll("[data-image-slider]")
+      .forEach((el) => setupSlider(el));
+  });
+</script>
+

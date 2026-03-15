@@ -1,17 +1,411 @@
 ---
+import Layout from "../layouts/Layout.astro";
+import ImageSlider from "../components/ImageSlider.astro";
 
+const work1 = Object.values(
+  import.meta.glob("../assets/work-periods/1/*.{jpg,jpeg,png,webp}", {
+    eager: true,
+    import: "default",
+  }),
+);
+const work2 = Object.values(
+  import.meta.glob("../assets/work-periods/2/*.{jpg,jpeg,png,webp}", {
+    eager: true,
+    import: "default",
+  }),
+);
+const work3 = Object.values(
+  import.meta.glob("../assets/work-periods/3/*.{jpg,jpeg,png,webp}", {
+    eager: true,
+    import: "default",
+  }),
+);
+
+const hotelFirst = Object.values(
+  import.meta.glob("../assets/hotels/first-floor/*.{jpg,jpeg,png,webp}", {
+    eager: true,
+    import: "default",
+  }),
+);
+const hotelSecond = Object.values(
+  import.meta.glob("../assets/hotels/second-floor/*.{jpg,jpeg,png,webp}", {
+    eager: true,
+    import: "default",
+  }),
+);
+const hotelReception = Object.values(
+  import.meta.glob("../assets/hotels/reception/*.{jpg,jpeg,png,webp}", {
+    eager: true,
+    import: "default",
+  }),
+);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Бортникова Тамара">
+  <header class="mb-8 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="h-9 w-9 rounded-full bg-rose-500 text-center text-lg font-semibold text-white">
+        ТБ
+      </div>
+      <div class="text-sm font-medium tracking-tight">
+        Бортникова Тамара
+      </div>
+    </div>
+    <nav class="hidden gap-6 text-xs font-medium uppercase tracking-[0.16em] text-slate-600 sm:flex">
+      <a href="#about" class="hover:text-rose-500">Обо мне</a>
+      <a href="#periods" class="hover:text-rose-500">Периоды работы</a>
+      <a href="#portfolio" class="hover:text-rose-500">Портфолио</a>
+      <a href="#hotels" class="hover:text-rose-500">Дизайн гостиниц</a>
+      <a href="#contacts" class="hover:text-rose-500">Контакты</a>
+    </nav>
+    <button
+      id="burger-button"
+      type="button"
+      class="inline-flex items-center justify-center rounded-full bg-white p-2 text-slate-700 shadow-sm ring-1 ring-slate-200 transition hover:bg-rose-50 sm:hidden"
+      aria-label="Открыть меню"
+      aria-expanded="false"
+    >
+      <span class="sr-only">Меню</span>
+      <span class="block h-0.5 w-5 rounded bg-slate-800"></span>
+      <span class="mt-1 block h-0.5 w-5 rounded bg-slate-800"></span>
+      <span class="mt-1 block h-0.5 w-4 rounded bg-slate-800"></span>
+    </button>
+  </header>
+
+  <nav
+    id="mobile-menu"
+    class="mb-6 hidden w-full flex-col gap-2 rounded-2xl bg-white p-4 text-xs font-medium uppercase tracking-[0.16em] text-slate-700 shadow-sm sm:hidden"
+  >
+    <a href="#about" class="block w-full rounded-xl px-3 py-2 hover:bg-rose-50">Обо мне</a>
+    <a href="#periods" class="block w-full rounded-xl px-3 py-2 hover:bg-rose-50">Периоды работы</a>
+    <a href="#portfolio" class="block w-full rounded-xl px-3 py-2 hover:bg-rose-50">Портфолио</a>
+    <a href="#hotels" class="block w-full rounded-xl px-3 py-2 hover:bg-rose-50">Дизайн гостиниц</a>
+    <a href="#contacts" class="block w-full rounded-xl px-3 py-2 hover:bg-rose-50">Контакты</a>
+  </nav>
+
+  <main class="space-y-10">
+    <section
+      id="about"
+      class="grid gap-6 rounded-3xl bg-white p-5 shadow-sm sm:grid-cols-[minmax(0,2fr)_minmax(0,1.2fr)] sm:p-7"
+    >
+      <div class="space-y-4">
+        <div class="inline-flex rounded-full bg-rose-50 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-rose-600">
+          Художественный руководитель
+        </div>
+        <h1 class="text-2xl font-semibold leading-tight sm:text-3xl">
+          Тамара Бортникова
+        </h1>
+        <p class="text-sm leading-relaxed text-slate-600">
+          Управляю крупными культурными институциями и развиваю цирковое искусство в России.
+          Прошла путь от региональных площадок до руководства ведущими филиалами «Росгосцирка».
+        </p>
+        <div class="flex flex-wrap gap-3 pt-1 text-xs font-semibold uppercase tracking-[0.16em] text-white">
+          <div class="flex items-center gap-2 rounded-2xl bg-rose-500 px-4 py-2">
+            <span class="text-2xl leading-none">15</span>
+            <span class="leading-tight">
+              лет
+              <br />
+              опыта
+              <br />
+              <span class="text-[10px] font-normal uppercase tracking-[0.16em] text-rose-50/80">
+                В индустрии событийного маркетинга и менеджмента
+              </span>
+            </span>
+          </div>
+          <div class="flex items-center gap-2 rounded-2xl bg-slate-900 px-4 py-2">
+            <span class="text-2xl leading-none">4</span>
+            <span class="leading-tight">
+              города
+              <br />
+              работы
+              <br />
+              <span class="text-[10px] font-normal uppercase tracking-[0.16em] text-slate-200/80">
+                Тула, Рязань, Екатеринбург, Нижний Новгород
+              </span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="flex items-center justify-center">
+        <div class="aspect-[3/4] w-40 overflow-hidden rounded-3xl bg-slate-100 sm:w-56">
+          <img
+            src="/portrait.jpg"
+            alt="Портрет Тамары Бортниковой"
+            class="h-full w-full object-cover"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </section>
+
+    <section id="periods" class="space-y-4">
+      <div class="flex items-center gap-3">
+        <div class="flex h-8 w-8 items-center justify-center rounded-2xl bg-rose-500 text-xs font-semibold text-white">
+          01
+        </div>
+        <h2 class="text-lg font-semibold">Периоды работы</h2>
+      </div>
+      <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <article class="space-y-3 rounded-3xl bg-white p-3 shadow-sm sm:p-4">
+          <div class="aspect-[4/3] overflow-hidden rounded-2xl bg-slate-100">
+            {work1[0] ? (
+              <img
+                src={work1[0]}
+                alt="Тульский государственный цирк"
+                class="h-full w-full object-cover"
+                loading="lazy"
+              />
+            ) : null}
+          </div>
+          <div class="space-y-1">
+            <h3 class="text-sm font-semibold">
+              Тульский государственный цирк
+            </h3>
+            <p class="text-xs text-slate-500">
+              Октябрь 2017 — 2019
+            </p>
+          </div>
+        </article>
+        <article class="space-y-3 rounded-3xl bg-white p-3 shadow-sm sm:p-4">
+          <div class="aspect-[4/3] overflow-hidden rounded-2xl bg-slate-100">
+            {work2[0] ? (
+              <img
+                src={work2[0]}
+                alt="Рязанский государственный цирк"
+                class="h-full w-full object-cover"
+                loading="lazy"
+              />
+            ) : null}
+          </div>
+          <div class="space-y-1">
+            <h3 class="text-sm font-semibold">
+              Рязанский государственный цирк
+            </h3>
+            <p class="text-xs text-slate-500">
+              2019 — август 2019
+            </p>
+          </div>
+        </article>
+        <article class="space-y-3 rounded-3xl bg-white p-3 shadow-sm sm:p-4">
+          <div class="aspect-[4/3] overflow-hidden rounded-2xl bg-slate-100">
+            {work3[0] ? (
+              <img
+                src={work3[0]}
+                alt="Екатеринбургский государственный цирк"
+                class="h-full w-full object-cover"
+                loading="lazy"
+              />
+            ) : null}
+          </div>
+          <div class="space-y-1">
+            <h3 class="text-sm font-semibold">
+              Екатеринбургский государственный цирк
+            </h3>
+            <p class="text-xs text-slate-500">
+              Август 2019 — март 2024
+            </p>
+          </div>
+        </article>
+        <article class="space-y-3 rounded-3xl bg-white p-3 shadow-sm sm:p-4">
+          <div class="aspect-[4/3] overflow-hidden rounded-2xl bg-slate-100">
+            {/* при желании можно добавить отдельную папку с фото для Нижнего Новгорода */}
+          </div>
+          <div class="space-y-1">
+            <h3 class="text-sm font-semibold">
+              Нижегородский государственный цирк
+            </h3>
+            <p class="text-xs text-slate-500">
+              Январь 2023 — март 2024
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="portfolio" class="space-y-4">
+      <div class="flex items-center gap-3">
+        <div class="flex h-8 w-8 items-center justify-center rounded-2xl bg-rose-500 text-xs font-semibold text-white">
+          02
+        </div>
+        <h2 class="text-lg font-semibold">Портфолио проектов</h2>
+      </div>
+      <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="flex flex-col justify-between gap-3 rounded-2xl bg-white p-3 text-xs shadow-sm sm:p-4">
+          <div class="space-y-1">
+            <h3 class="font-semibold">Яровое, Алтайский край</h3>
+            <p class="text-[11px] text-slate-500">Июнь 2016</p>
+            <a href="#" class="block text-[11px] font-medium text-rose-500 hover:underline">
+              Цирк-шапито «Слоны на Яровом»
+            </a>
+          </div>
+        </div>
+        <div class="flex flex-col justify-between gap-3 rounded-2xl bg-white p-3 text-xs shadow-sm sm:p-4">
+          <div class="space-y-1">
+            <h3 class="font-semibold">«Тульский цирк»</h3>
+            <p class="text-[11px] text-slate-500">Апрель 2018</p>
+            <a href="#" class="block text-[11px] font-medium text-rose-500 hover:underline">
+              «Учебная эвакуация зрителей»
+            </a>
+          </div>
+        </div>
+        <div class="flex flex-col justify-between gap-3 rounded-2xl bg-white p-3 text-xs shadow-sm sm:p-4">
+          <div class="space-y-1">
+            <h3 class="font-semibold">«Тульский цирк»</h3>
+            <p class="text-[11px] text-slate-500">Май 2018</p>
+            <a href="#" class="block text-[11px] font-medium text-rose-500 hover:underline">
+              «Под куполом Победы»
+            </a>
+          </div>
+        </div>
+        <div class="flex flex-col justify-between gap-3 rounded-2xl bg-white p-3 text-xs shadow-sm sm:p-4">
+          <div class="space-y-1">
+            <h3 class="font-semibold">Яровое, Алтайский край</h3>
+            <p class="text-[11px] text-slate-500">Июль 2018</p>
+            <a href="#" class="block text-[11px] font-medium text-rose-500 hover:underline">
+              Цирк-шапито «Большое путешествие по странам и континентам»
+            </a>
+          </div>
+        </div>
+        <div class="flex flex-col justify-between gap-3 rounded-2xl bg-white p-3 text-xs shadow-sm sm:p-4">
+          <div class="space-y-1">
+            <h3 class="font-semibold">Яровое, Алтайский край</h3>
+            <p class="text-[11px] text-slate-500">Июль 2018</p>
+            <a href="#" class="block text-[11px] font-medium text-rose-500 hover:underline">
+              Рекорд «Звезда на Яровом-2018»
+            </a>
+          </div>
+        </div>
+        <div class="flex flex-col justify-between gap-3 rounded-2xl bg-white p-3 text-xs shadow-sm sm:p-4">
+          <div class="space-y-1">
+            <h3 class="font-semibold">«Рязанский цирк»</h3>
+            <p class="text-[11px] text-slate-500">Сентябрь 2018</p>
+            <a href="#" class="block text-[11px] font-medium text-rose-500 hover:underline">
+              Открытие цирка
+            </a>
+          </div>
+        </div>
+        <div class="flex flex-col justify-between gap-3 rounded-2xl bg-white p-3 text-xs shadow-sm sm:p-4">
+          <div class="space-y-1">
+            <h3 class="font-semibold">«Рязанский цирк»</h3>
+            <p class="text-[11px] text-slate-500">Декабрь 2018</p>
+            <a href="#" class="block text-[11px] font-medium text-rose-500 hover:underline">
+              «Благотворительное Новогоднее представление для детей из области»
+            </a>
+          </div>
+        </div>
+        <div class="flex flex-col justify-between gap-3 rounded-2xl bg-white p-3 text-xs shadow-sm sm:p-4">
+          <div class="space-y-1">
+            <h3 class="font-semibold">«Рязанский цирк»</h3>
+            <p class="text-[11px] text-slate-500">Декабрь 2018</p>
+            <a href="#" class="block text-[11px] font-medium text-rose-500 hover:underline">
+              Новогодний хоровод со слонами
+            </a>
+          </div>
+        </div>
+        <div class="flex flex-col justify-between gap-3 rounded-2xl bg-white p-3 text-xs shadow-sm sm:p-4">
+          <div class="space-y-1">
+            <h3 class="font-semibold">«Рязанский цирк»</h3>
+            <p class="text-[11px] text-slate-500">Февраль 2019</p>
+            <a href="#" class="block text-[11px] font-medium text-rose-500 hover:underline">
+              Благотворительная акция «Доктор цирк»
+            </a>
+          </div>
+        </div>
+        <div class="flex flex-col justify-between gap-3 rounded-2xl bg-white p-3 text-xs shadow-sm sm:p-4">
+          <div class="space-y-1">
+            <h3 class="font-semibold">«Екатеринбургский цирк»</h3>
+            <p class="text-[11px] text-slate-500">Май 2019</p>
+            <a href="#" class="block text-[11px] font-medium text-rose-500 hover:underline">
+              «Интервью с блогером Екатеринбурга про цирк»
+            </a>
+          </div>
+        </div>
+        <div class="flex flex-col justify-between gap-3 rounded-2xl bg-white p-3 text-xs shadow-sm sm:p-4">
+          <div class="space-y-1">
+            <h3 class="font-semibold">«Рязанский цирк»</h3>
+            <p class="text-[11px] text-slate-500">Июнь 2019</p>
+            <a href="#" class="block text-[11px] font-medium text-rose-500 hover:underline">
+              «1 июня — Праздник цирка и детства»
+            </a>
+          </div>
+        </div>
+        <div class="flex flex-col justify-between gap-3 rounded-2xl bg-white p-3 text-xs shadow-sm sm:p-4">
+          <div class="space-y-1">
+            <h3 class="font-semibold">Яровое, Алтайский край</h3>
+            <p class="text-[11px] text-slate-500">Июль 2019</p>
+            <a href="#" class="block text-[11px] font-medium text-rose-500 hover:underline">
+              Рекорд «Звезда на Яровом-2019»
+            </a>
+          </div>
+        </div>
+        <div class="flex flex-col justify-between gap-3 rounded-2xl bg-white p-3 text-xs shadow-sm sm:p-4">
+          <div class="space-y-1">
+            <h3 class="font-semibold">«Екатеринбургский цирк»</h3>
+            <p class="text-[11px] text-slate-500">Август 2019</p>
+            <a href="#" class="block text-[11px] font-medium text-rose-500 hover:underline">
+              «Пресс-конференция ТАСС о работе цирка в период распространения новой коронавирусной инфекции COVID-19»
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="space-y-4">
+      <div class="flex items-center gap-3">
+        <div class="flex h-8 w-8 items-center justify-center rounded-2xl bg-rose-500 text-xs font-semibold text-white">
+          03
+        </div>
+        <h2 class="text-lg font-semibold">
+          Ролик о работе в цирках
+        </h2>
+      </div>
+      <div class="flex min-h-[200px] items-center justify-center rounded-3xl bg-white text-sm text-slate-400 shadow-sm sm:min-h-[260px]">
+        ТУТ БУДЕТ РОЛИК О РАБОТЕ В РАЗНЫХ ЦИРКАХ
+      </div>
+    </section>
+
+    <section id="hotels" class="space-y-4">
+      <div class="flex items-center gap-3">
+        <div class="flex h-8 w-8 items-center justify-center rounded-2xl bg-rose-500 text-xs font-semibold text-white">
+          04
+        </div>
+        <h2 class="text-lg font-semibold">Дизайн гостиниц</h2>
+      </div>
+      <div class="space-y-6">
+        <div data-image-slider>
+          <ImageSlider title="Первый этаж" images={hotelFirst} />
+        </div>
+        <div data-image-slider>
+          <ImageSlider title="Второй этаж" images={hotelSecond} />
+        </div>
+        <div data-image-slider>
+          <ImageSlider title="Ресепшн" images={hotelReception} />
+        </div>
+      </div>
+    </section>
+
+    <section id="contacts" class="space-y-4">
+      <div class="flex items-center gap-3">
+        <div class="flex h-8 w-8 items-center justify-center rounded-2xl bg-rose-500 text-xs font-semibold text-white">
+          05
+        </div>
+        <h2 class="text-lg font-semibold">Контакты</h2>
+      </div>
+      <div class="grid gap-4 rounded-3xl bg-white p-5 text-sm shadow-sm sm:grid-cols-2 sm:p-6">
+        <div class="space-y-1">
+          <p class="text-slate-500">Телефон</p>
+          <a href="tel:+79200000000" class="text-base font-medium text-slate-900 hover:text-rose-500">
+            +7 (920) 000–00–00
+          </a>
+        </div>
+        <div class="space-y-1">
+          <p class="text-slate-500">Почта</p>
+          <a href="mailto:tamara@example.ru" class="text-base font-medium text-slate-900 hover:text-rose-500">
+            tamara@example.ru
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+

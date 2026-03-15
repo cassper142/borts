@@ -1,0 +1,47 @@
+---
+import "../styles/global.css";
+const { title = "Бортникова Тамара" } = Astro.props;
+---
+
+<html lang="ru" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="min-h-screen bg-[#f7f5f6] font-sans text-slate-900">
+    <div class="mx-auto max-w-5xl px-4 py-6 sm:px-6 lg:px-8">
+      <slot />
+    </div>
+    <script>
+      const toggle = () => {
+        const menu = document.getElementById("mobile-menu");
+        const btn = document.getElementById("burger-button");
+        if (!menu || !btn) return;
+        const isOpen = menu.classList.toggle("hidden");
+        btn.setAttribute("aria-expanded", String(!isOpen));
+      };
+      globalThis.addEventListener("DOMContentLoaded", () => {
+        const btn = document.getElementById("burger-button");
+        if (btn) btn.addEventListener("click", toggle);
+      });
+    </script>
+  </body>
+</html>
+
